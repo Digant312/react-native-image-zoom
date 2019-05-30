@@ -23,6 +23,9 @@ export interface IOnClick {
 }
 
 export class Props {
+  public initialScale?: number;
+  public initX?: number;
+  public initY?: number;
   /**
    * 操作区域宽度
    */
