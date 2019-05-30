@@ -569,11 +569,11 @@ export default class ImageViewer extends React.Component<Props, State> {
     // swipeDown 溢出量置空
     this.swipeDownOffset = 0;
 
-    if(this.props.initialScale && this.scale === this.props.initialScale) {
-      this.scale = this.props.initialScale || 1;
-      this.positionX = this.props.initX || 0;
-      this.positionY = this.props.initY || 0;
-    }
+    // if(this.props.initialScale && this.scale === this.props.initialScale) {
+    //   this.scale = this.props.initialScale || 1;
+    //   this.positionX = this.props.initX || 0;
+    //   this.positionY = this.props.initY || 0;
+    // }
 
     this.imageDidMove('onPanResponderRelease');
   };
