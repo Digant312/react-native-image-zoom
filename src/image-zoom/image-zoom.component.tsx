@@ -136,28 +136,41 @@ export default class ImageViewer extends React.Component<Props, State> {
             this.isDoubleClick = true;
 
             if (this.props.enableDoubleClickZoom) {
-              if (this.scale > 1 || this.scale < 1) {
-                // 回归原位
-                this.scale = 1;
+              if(!this.props.initialScale) {
+                if (this.scale > 1 || this.scale < 1) {
+                  // 回归原位
+                  this.scale = 1;
 
-                this.positionX = 0;
-                this.positionY = 0;
+                  this.positionX = 0;
+                  this.positionY = 0;
+                } else {
+                  // 开始在位移地点缩放
+                  // 记录之前缩放比例
+                  // 此时 this.scale 一定为 1
+                  const beforeScale = this.scale;
+
+                  // 开始缩放
+                  this.scale = 2;
+
+                  // 缩放 diff
+                  const diffScale = this.scale - beforeScale;
+                  // 找到两手中心点距离页面中心的位移
+                  // 移动位置
+                  this.positionX = ((this.props.cropWidth / 2 - this.doubleClickX) * diffScale) / this.scale;
+
+                  this.positionY = ((this.props.cropHeight / 2 - this.doubleClickY) * diffScale) / this.scale;
+                }
               } else {
-                // 开始在位移地点缩放
-                // 记录之前缩放比例
-                // 此时 this.scale 一定为 1
-                const beforeScale = this.scale;
-
-                // 开始缩放
-                this.scale = 2;
-
-                // 缩放 diff
-                const diffScale = this.scale - beforeScale;
-                // 找到两手中心点距离页面中心的位移
-                // 移动位置
-                this.positionX = ((this.props.cropWidth / 2 - this.doubleClickX) * diffScale) / this.scale;
-
-                this.positionY = ((this.props.cropHeight / 2 - this.doubleClickY) * diffScale) / this.scale;
+                if (this.scale < 1) {
+                  this.scale = 1;
+                  this.positionX = 0;
+                  this.positionY = 0;
+                } else {
+                  // 回归原位
+                  this.scale = this.props.initialScale || 1;
+                  this.positionX = this.props.initX || 0;
+                  this.positionY = this.props.initY || 0;
+                }
               }
 
               this.imageDidMove('centerOn');
