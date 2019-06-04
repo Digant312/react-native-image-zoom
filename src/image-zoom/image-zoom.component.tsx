@@ -141,8 +141,8 @@ export default class ImageViewer extends React.Component<Props, State> {
                   // 回归原位
                   this.scale = 1;
 
-                  this.positionX = 0;
-                  this.positionY = 0;
+                  this.positionX = this.props.initX || 0;
+                  this.positionY = this.props.initY || 0;
                 } else {
                   // 开始在位移地点缩放
                   // 记录之前缩放比例
