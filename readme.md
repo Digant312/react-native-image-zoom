@@ -13,7 +13,7 @@
 ### Installation
 
 ```bash
-npm i react-native-image-pan-zoom --save
+npm i react-native-image-pan-zoom2 --save
 ```
 
 ### Basic Usage
@@ -34,7 +34,7 @@ $ create-react-native-app AwesomeProject
 
 ```typescript
 import { Image, Dimensions } from 'react-native';
-import ImageZoom from 'react-native-image-pan-zoom';
+import ImageZoom from 'react-native-image-pan-zoom2';
 
 export default class App extends React.Component {
     render: function() {
